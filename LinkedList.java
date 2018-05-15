@@ -1,17 +1,17 @@
-class LinkedList {
+class LinkedList <T> {
     Node head;
 
-    static class Node {
-        int data;
+    class Node <T> {
+        T data;
         Node next;
 
-        Node(int data) {
+        Node(T data) {
             this.data = data;
         }
     }
 
-    void append(int data) {
-        Node newNode = new Node(data);
+    void append(T data) {
+        Node<T> newNode = new Node<T>(data);
         if (head == null) {
             head = newNode;
         }
@@ -23,10 +23,34 @@ class LinkedList {
         }
     }
 
-    void insertFront(int data) {
-        Node newNode = new Node(data);
+    void insertFront(T data) {
+        Node<T> newNode = new Node<T>(data);
         newNode.next = head;
         head = newNode;
+    }
+
+    //Delete first ocurrence of data
+    void deleteKey(T data) {
+        if (head == null) {
+            //throw exception.
+            return;
+        }
+        if (head.data.equals(data)) {
+            head = head.next;
+            return;
+        }
+        Node previous = null;
+        Node current = head;
+        while(!current.data.equals(data)){
+            previous = current;
+            current = current.next;
+        }
+        if (previous == null) {
+            //throw key not found exception
+            return;
+        }
+        System.out.println("Seems to work");
+        previous.next = current.next;
     }
 
     void printList() {
@@ -38,13 +62,4 @@ class LinkedList {
             track = track.next;
         }
     }
-
-    public static void main(String args[]) {
-        LinkedList list = new LinkedList();
-        list.insertFront(1);
-        list.insertFront(2);
-        list.insertFront(3);
-        list.printList();
-    }
-
 }
