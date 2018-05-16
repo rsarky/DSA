@@ -41,15 +41,14 @@ class LinkedList <T> {
         }
         Node previous = null;
         Node current = head;
-        while(!current.data.equals(data)){
+        while(current != null && !current.data.equals(data)){
             previous = current;
             current = current.next;
         }
-        if (previous == null) {
+        if (current == null) {
             //throw key not found exception
             return;
         }
-        System.out.println("Seems to work");
         previous.next = current.next;
     }
 
